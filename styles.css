@@ -1,0 +1,16 @@
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.square {
+  background-color: blue;
+  box-sizing: border-box;
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+}
+
+.square-hovered {
+  background-color: lightblue;
+}
