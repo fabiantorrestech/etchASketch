@@ -1,5 +1,16 @@
+body{
+  display: flex;
+  flex-direction: row;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+}
+
 .row {
   display: flex;
+  flex-direction: row;
   justify-content: center;
 }
 
@@ -13,4 +24,8 @@
 
 .square-hovered {
   background-color: lightblue;
+}
+
+.grid-size-button {
+  
 }
