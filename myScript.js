@@ -9,7 +9,6 @@ function createGrid(numSquares){
 
   let grid = document.createElement('div');
   grid.className = "grid";
-  grid.id = "gridId"
 
   for(let i=0; i<numSquares; i++){
     let row = document.createElement('div');
@@ -35,20 +34,27 @@ function main(){
   let numSquares = 4;
   let grid;
 
-  // setup grid size button
+  // setup options panel
+  let options = document.createElement('div');
+  options.className = "options";
+
+  // options panel - grid-size-button
   let gridSizeButton = document.createElement('button');
+  gridSizeButton.textContent = "Select grid size";
   gridSizeButton.className = "grid-size-button";
+
   gridSizeButton.addEventListener('click', () => {
     numSquares = prompt("How many squares per side do you want for the grid? Enter a number.");
     // remove old grid
     if(document.getElementsByClassName("grid")){
       grid.remove();
     }
-    createGrid(numSquares);
+    grid = createGrid(numSquares);
   }); 
-  body.appendChild(gridSizeButton);
 
-  grid = createGrid(numSquares);
+  options.appendChild(gridSizeButton);
+  body.appendChild(options);
+  grid = createGrid(numSquares); // auto-generate the grid the 1st time.
 
   return;
 }

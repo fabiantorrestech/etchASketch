@@ -17,13 +17,19 @@ body{
 .square {
   background-color: blue;
   box-sizing: border-box;
-  width: 200px;
-  height: 200px;
+  width: 20px;
+  height: 20px;
   border: 2px solid black;
 }
 
 .square-hovered {
   background-color: lightblue;
+}
+
+.options {
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 20px;
 }
 
 .grid-size-button {
