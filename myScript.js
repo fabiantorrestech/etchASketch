@@ -45,6 +45,10 @@ function main(){
 
   gridSizeButton.addEventListener('click', () => {
     numSquares = prompt("How many squares per side do you want for the grid? Enter a number.");
+    while(numSquares < 1 || numSquares > 100){
+      alert("Enter a number between 1-100 inclusive.");
+      numSquares = prompt("How many squares per side do you want for the grid? Enter a number.");
+    }
     // remove old grid
     if(document.getElementsByClassName("grid")){
       grid.remove();
@@ -54,7 +58,8 @@ function main(){
 
   options.appendChild(gridSizeButton);
   body.appendChild(options);
-  grid = createGrid(numSquares); // auto-generate the grid the 1st time.
+  // auto-generate the grid the 1st time.
+  grid = createGrid(numSquares);
 
   return;
 }
