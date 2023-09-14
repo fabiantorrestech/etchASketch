@@ -1,12 +1,7 @@
 const body = document.body;
 
-function removeElement(id) {
-  let elem = document.getElementById(id);
-  return elem.parentNode.removeChild(elem);
-}
-
+// given numSquares (same number for length & width), returns a grid of that size
 function createGrid(numSquares){
-
   let grid = document.createElement('div');
   grid.className = "grid";
 
@@ -25,10 +20,9 @@ function createGrid(numSquares){
     grid.appendChild(row);
   }
 
-  body.appendChild(grid);
-
   return grid;
 }
+
 
 function main(){
   let numSquares = 4;
@@ -38,11 +32,16 @@ function main(){
   let options = document.createElement('div');
   options.className = "options";
 
-  // options panel - grid-size-button
+  // options panel - grid-resizing-button
   let gridSizeButton = document.createElement('button');
   gridSizeButton.textContent = "Select grid size";
   gridSizeButton.className = "grid-size-button";
 
+  // grid container
+  let gridContainer = document.createElement('div');
+  gridContainer.className = "grid-container";
+
+  // logic for grid-resizing-button
   gridSizeButton.addEventListener('click', () => {
     numSquares = prompt("How many squares per side do you want for the grid? Enter a number.");
     while(numSquares < 1 || numSquares > 100){
@@ -54,12 +53,18 @@ function main(){
       grid.remove();
     }
     grid = createGrid(numSquares);
+    gridContainer.appendChild(grid);
+    body.appendChild(grid);
   }); 
 
   options.appendChild(gridSizeButton);
   body.appendChild(options);
+
   // auto-generate the grid the 1st time.
   grid = createGrid(numSquares);
+  gridContainer.appendChild(grid);
+  body.appendChild(grid);
+  
 
   return;
 }
