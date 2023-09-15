@@ -4,9 +4,9 @@ body{
 }
 
 .grid-container {
-  display: grid;
-  max-width: 500px;
-  max-height: 500px;
+  box-sizing: border-box;
+  /* max-height: 700px;
+  max-width: 700px; */
 }
 
 .grid {
@@ -23,8 +23,6 @@ body{
 .square {
   background-color: blue;
   box-sizing: border-box;
-  width: 10px;
-  height: 10px;
   border: 1px solid black;
 }
 
