@@ -18,10 +18,19 @@ function cleanupBorders(square, numSquares, i, j){
   return square;
 }
 
+function createFooter(){
+  let footer = document.createElement('div');
+  let footerText = document.createElement('p');
+  footer.className = "footer";
+  footerText.textContent = "FabianTorresTech 2023";
+  footer.appendChild(footerText);
+  return footer;
+}
+
 // given numSquares (same number for length & width), returns a grid of that size
 function createGrid(numSquares, gridContainer){
-  let maxWidth = removePx(gridContainer.style.maxWidth);
-  let maxHeight = removePx(gridContainer.style.maxHeight);
+  let maxWidth = removePx(gridContainer.style.width);
+  let maxHeight = removePx(gridContainer.style.height);
 
   let grid = document.createElement('div');
   grid.className = "grid";
@@ -38,6 +47,7 @@ function createGrid(numSquares, gridContainer){
       square.style.height = `${maxHeight/numSquares}px`;
       square = cleanupBorders(square, numSquares, i, j);
 
+      // change color of squares
       square.addEventListener('mouseover', () => {
         square.classList.add("square-hovered");
       });
@@ -54,11 +64,24 @@ function main(){
   let numSquares = 4;
   let grid;
 
+  let title = document.createElement('h1');
+  title.className = "title";
+  title.textContent = "Etch-A-Sketch!";
+  body.appendChild(title);
+
+  let titleText = document.createElement('p');
+  titleText.className = "title-text";
+  titleText.textContent = "Welcome to my etch-a-sketch app.\r\n";
+  titleText.textContent += "To draw, simply hover your mouse over any square to change its color.\r\n";
+  titleText.textContent += "To change the grid size to add more pixels, you can click the 'Select grid size' button and enter your number of squares. \r\n (ex: 4 = 4x4 = 16 pixel grid)\r\n\r\n";
+  titleText.textContent += "Enjoy! (:";
+  body.appendChild(titleText);
+
   // setup options panel
   let options = document.createElement('div');
   options.className = "options";
 
-  // options panel - grid-resizing-button
+  // options panel buttons
   let gridSizeButton = document.createElement('button');
   gridSizeButton.textContent = "Select grid size";
   gridSizeButton.className = "grid-size-button";
@@ -66,8 +89,9 @@ function main(){
   // grid container
   let gridContainer = document.createElement('div');
   gridContainer.className = "grid-container";
-  gridContainer.style.maxHeight = "700px";
-  gridContainer.style.maxWidth = "700px";
+  gridContainer.style.height = "500px";
+  gridContainer.style.width = "500px";
+  gridContainer.style.justifyContent = "center";
 
   // logic for grid-resizing-button
   gridSizeButton.addEventListener('click', () => {
@@ -82,8 +106,11 @@ function main(){
     }
     grid = createGrid(numSquares, gridContainer);
     gridContainer.appendChild(grid);
+
+    // TODO: it should be append gridContainer, NOT grid.
     body.appendChild(grid);
   }); 
+
 
   options.appendChild(gridSizeButton);
   body.appendChild(options);
@@ -91,7 +118,13 @@ function main(){
   // auto-generate the grid the 1st time.
   grid = createGrid(numSquares, gridContainer);
   gridContainer.appendChild(grid);
+
+  // TODO: fix this -- it should be appending the gridContainer, not grid.
   body.appendChild(grid);
+
+  // // Footer
+  // let footer = createFooter();
+  // body.appendChild(footer);
   
   return;
 }
