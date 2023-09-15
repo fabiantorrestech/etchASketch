@@ -28,9 +28,9 @@ function createFooter(){
 }
 
 // given numSquares (same number for length & width), returns a grid of that size
-function createGrid(numSquares, gridContainer){
-  let maxWidth = removePx(gridContainer.style.width);
-  let maxHeight = removePx(gridContainer.style.height);
+function createGrid(numSquares, gridSizingContainer){
+  let maxWidth = removePx(gridSizingContainer.style.width);
+  let maxHeight = removePx(gridSizingContainer.style.height);
 
   let grid = document.createElement('div');
   grid.className = "grid";
@@ -85,10 +85,10 @@ function main(){
   gridSizeButton.className = "grid-size-button";
 
   // grid container (sizing boundaries for rows/squares)
-  let gridContainer = document.createElement('div');
-  gridContainer.className = "grid-container";
-  gridContainer.style.height = "500px";
-  gridContainer.style.width = "500px";
+  let gridSizingContainer = document.createElement('div');
+  gridSizingContainer.className = "grid-sizing-container";
+  gridSizingContainer.style.height = "500px";
+  gridSizingContainer.style.width = "500px";
 
   // outerGridContainer (responsible for placement on page - flexbox)
   let outerGridContainer = document.createElement('div');
@@ -105,9 +105,9 @@ function main(){
     if(document.getElementsByClassName("grid")){
       grid.remove();
     }
-    // create new grid and append it to gridContainer.
-    grid = createGrid(numSquares, gridContainer);
-    gridContainer.appendChild(grid);
+    // create new grid and append it to gridSizingContainer.
+    grid = createGrid(numSquares, gridSizingContainer);
+    gridSizingContainer.appendChild(grid);
   }); 
 
 
@@ -118,11 +118,11 @@ function main(){
   //
   // - append created grid in this order...
   //    + grid (rows and columns) ->
-  //    + gridContainer (sizing boundaries) ->
+  //    + gridSizingContainer (sizing boundaries) ->
   //    + outerGridContainer (flexbox centering)
-  grid = createGrid(numSquares, gridContainer);
-  gridContainer.appendChild(grid);
-  outerGridContainer.appendChild(gridContainer);
+  grid = createGrid(numSquares, gridSizingContainer);
+  gridSizingContainer.appendChild(grid);
+  outerGridContainer.appendChild(gridSizingContainer);
   body.append(outerGridContainer);
 
   let footer = createFooter();
