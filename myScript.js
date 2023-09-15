@@ -80,20 +80,21 @@ function main(){
   // setup options panel
   let options = document.createElement('div');
   options.className = "options";
-
-  // options panel buttons
   let gridSizeButton = document.createElement('button');
   gridSizeButton.textContent = "Select grid size";
   gridSizeButton.className = "grid-size-button";
 
-  // grid container
+  // grid container (sizing boundaries for rows/squares)
   let gridContainer = document.createElement('div');
   gridContainer.className = "grid-container";
   gridContainer.style.height = "500px";
   gridContainer.style.width = "500px";
-  gridContainer.style.justifyContent = "center";
 
-  // logic for grid-resizing-button
+  // outerGridContainer (responsible for placement on page - flexbox)
+  let outerGridContainer = document.createElement('div');
+  outerGridContainer.className = "outer-grid-container";
+
+  // logic for gridSizeButton
   gridSizeButton.addEventListener('click', () => {
     numSquares = prompt("How many squares per side do you want for the grid? Enter a number.");
     while(numSquares < 1 || numSquares > 100){
@@ -104,27 +105,28 @@ function main(){
     if(document.getElementsByClassName("grid")){
       grid.remove();
     }
+    // create new grid and append it to gridContainer.
     grid = createGrid(numSquares, gridContainer);
     gridContainer.appendChild(grid);
-
-    // TODO: it should be append gridContainer, NOT grid.
-    body.appendChild(grid);
   }); 
 
 
   options.appendChild(gridSizeButton);
   body.appendChild(options);
 
-  // auto-generate the grid the 1st time.
+  // auto-generate the grid the 1st time and append it
+  //
+  // - append created grid in this order...
+  //    + grid (rows and columns) ->
+  //    + gridContainer (sizing boundaries) ->
+  //    + outerGridContainer (flexbox centering)
   grid = createGrid(numSquares, gridContainer);
   gridContainer.appendChild(grid);
+  outerGridContainer.appendChild(gridContainer);
+  body.append(outerGridContainer);
 
-  // TODO: fix this -- it should be appending the gridContainer, not grid.
-  body.appendChild(grid);
-
-  // // Footer
-  // let footer = createFooter();
-  // body.appendChild(footer);
+  let footer = createFooter();
+  body.appendChild(footer);
   
   return;
 }
